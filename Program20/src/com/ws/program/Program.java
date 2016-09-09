@@ -1,9 +1,13 @@
 package com.ws.program;
 
 import com.ws.node.TreeNode;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+/*
+给定一棵二叉树，设计一个算法，创建含有某一深度上所有结点的链表（比如，若一棵树的深度为D
+,则会创建出D个链表
+ */
 
 /**
  * Created by laowang on 16-9-8.
