@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -49,6 +50,36 @@ public class Main {
 
     }
 
+
+    private boolean getPath1(int x, int y, ArrayList<Point> path, Hashtable<Point,Boolean> cache){
+        Point p = new Point(x,y);
+        if(cache.containsKey(p)){
+            return cache.get(p);
+        }
+        path.add(p);
+
+        if(x==0 && y==0){
+            return true;
+        }
+        boolean success = false;
+        if(x >=1 && isFree(x-1,y)){
+            success = getPath1(x-1,y,path,cache);
+        }
+        if(!success && y>=1 && isFree(x,y-1)){
+            success = getPath1(x,y-1,path,cache);
+        }
+        if(!success)
+            path.add(p);
+        cache.put(p,success);
+        return success;
+    }
+
+    /*
+    由于之前提到了重复路径问题。要找到一条前往(x,y)的路径，就要找出到他的相邻顶点的、
+    (x-1,y)和(x,y-1)的路径。当然，若其中一个方格禁止同行，我们就要绕着走，接着再看这两个相邻点
+    (x-1,y),(x-1,y-1),(x-1,y-1),和(x,y-2)其中，(x-1,y-1)出现了两次，也意味着我们做了一次无用功。理想情况下，我们应该几下先前访问的
+    (x-1,y-1)以免浪费宝贵时间
+     */
     private static boolean isFree(int x,int y){
         return !(x == 2 && y == 2);
     }
