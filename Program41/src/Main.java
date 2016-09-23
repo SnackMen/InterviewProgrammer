@@ -14,10 +14,15 @@ B并入A并排序
 
 public class Main {
     public static void main(String []args){
-
+        int []a = new int[]{1,3,5,7,9};
+        int []b = new int[]{2,4,6,8,10,0,0,0,0,0};
+        merge(b,a,5,5);
+        for(int nu : b){
+            System.out.println(nu);
+        }
     }
 
-    public static void merge(int []a,int []b,int lastA,int lastB){
+    private static void merge(int[] a, int[] b, int lastA, int lastB){
         int indexA = lastA -1;//数组a最后元素的索引
         int indexB = lastB -1;//数组b最后元素的索引
         int indexMerged = lastB+lastA-1;//合并后数组的最后元素索引
@@ -38,7 +43,8 @@ public class Main {
             }
         }
         /*
-        将数组b剩余元素复制到适当位置
+        将数组b剩余元素复制到适当位置,这里不需要考虑a的原因是因为，如果b用完，而a还剩余，那么因为a是有序数组，所以依然按照这个顺序就好了，不需要再考虑顺序
+        但是b不一样，如果a用完，但b没有用完，那么b一定实在a的最小值前面接着往前排列
          */
         while (indexB >=0){
             a[indexMerged] = b[indexB];
